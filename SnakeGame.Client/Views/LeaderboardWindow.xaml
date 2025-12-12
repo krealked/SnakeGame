@@ -1,0 +1,14 @@
+<Window x:Class="SnakeGame.Client.Views.LeaderboardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Leaderboard" Height="400" Width="400" WindowStartupLocation="CenterOwner">
+    <Grid Margin="8">
+        <DataGrid x:Name="Grid" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Player" Binding="{Binding PlayerName}"/>
+                <DataGridTextColumn Header="Score" Binding="{Binding Score}"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding DateAchieved}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
