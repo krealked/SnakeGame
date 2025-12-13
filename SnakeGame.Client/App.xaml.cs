@@ -18,7 +18,7 @@ public partial class App : Application
             {
                 services.AddHttpClient<IApiService, ApiService>(c =>
                 {
-                    c.BaseAddress = new Uri(context.Configuration["Server:BaseUrl"] ?? "https://localhost:5001/");
+                    c.BaseAddress = new Uri(context.Configuration["Server:BaseUrl"] ?? "https://localhost:7266");
                 });
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton<LeaderboardViewModel>();
