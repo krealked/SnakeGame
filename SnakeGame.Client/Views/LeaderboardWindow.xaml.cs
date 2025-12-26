@@ -1,30 +1,23 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using SnakeGame.Client.Services;
+using SnakeGame.Client.ViewModels;
 
 namespace SnakeGame.Client.Views;
 
 public partial class LeaderboardWindow : Window
 {
-    private readonly IApiService _api;
-
     public LeaderboardWindow()
     {
         InitializeComponent();
-        _api = App.AppHost!.Services.GetRequiredService<IApiService>();
-        Loaded += LeaderboardWindow_Loaded;
-    }
 
-    private async void LeaderboardWindow_Loaded(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            var list = await _api.GetLeaderboardAsync(10);
-            Grid.ItemsSource = list;
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Не удалось загрузить таблицу лидеров: {ex.Message}");
-        }
+        // Получаем сервис API
+        var api = App.AppHost!.Services.GetRequiredService<IApiService>();
+
+        // Создаём ViewModel, которая уже сама загрузит топ-10 и присвоит Rank
+        var vm = new LeaderboardViewModel(api);
+
+        // Назначаем DataContext для биндинга в XAML
+        DataContext = vm;
     }
 }
